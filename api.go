@@ -100,7 +100,7 @@ func (c *ApiClient) Signature(signature, timestamp, nonce string) bool {
 
 func (c *ApiClient) GetToken() (string, error) {
 	if c.cache != nil {
-		if v := c.cache.Get(default_token_key); v != nil {
+		if v := c.cache.Get(default_token_key); v != "" {
 			switch t := v.(type) {
 			case string:
 				return t, nil
@@ -152,7 +152,7 @@ func (c *ApiClient) Download() error{
 func (c *ApiClient) GetSubscriber(oid string, subscriber *entry.Subscriber) error{
 	
 	if c.cache != nil {
-		if v := c.cache.Get("sub_"+oid); v != nil {
+		if v := c.cache.Get("sub_"+oid); v != "" {
 			switch t := v.(type) {
 			case []byte:
 				if err := json.Unmarshal(t, subscriber); err != nil {
